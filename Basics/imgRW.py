@@ -4,8 +4,8 @@ import cv2
 #  add parameter 0 for grayscale and
 #  parameter 1 or above for normal 3 channel
 def imgLoad():
-    image= cv2.imread('cvlogo.png') 
-    cv2.imshow("Title",image)
+    img = cv2.imread('cvlogo.png')
+    cv2.imshow("Title", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -14,6 +14,7 @@ def imgWrite():
     print("Converting to b&w")
     img=cv2.imread('cvlogo.png',0)
     img_dup=cv2.imwrite("newImage.png",img)
+    img_dup=cv2.imread('newImage.png',0)
     cv2.imshow("NewImage",img_dup)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
