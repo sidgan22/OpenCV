@@ -28,13 +28,13 @@ class BasicFunctions:
 
     def cap_video(self,srcname):
         # Video capture could include a video or webcam feed
-        cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture(srcname)
         # set height and width of cap
-        cap.set(3, 1000)
-        cap.set(4, 400)
+        cap.set(3, 500)
+        cap.set(4, 500)
 
         # brightness set
-        cap.set(10, 50)
+        cap.set(10, 150)
 
         while True:
             success, img = cap.read()
@@ -132,17 +132,19 @@ class BasicFunctions:
             ver = hor
         return ver
 
-    img = cv2.imread('cards.jpg')
-    imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    imgStack = stackImages(0.5, ([img, imgGray, img], [img, img, img]))
-
-    cv2.imshow("ImageStack", imgStack)
-
-    cv2.waitKey(0)
 
 
 if __name__ == "__main__" :
     print("Start")
     ob = BasicFunctions(True)
+    ob.cap_video(2)
+    #
+    # img = cv2.imread('cards.jpg')
+    # imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    #
+    # imgStack = ob.stackImages(0.5, ([img, imgGray, img], [img, img, img]))
+    #
+    # cv2.imshow("ImageStack", imgStack)
+    #
+    # cv2.waitKey(0)
     print("End")
