@@ -26,7 +26,11 @@ cap.set(4,fHeight)
 cap.set(10,150)
 while True:
     succ, img = cap.read()
-    facesDet = faceCascade.detectMultiScale(img,1.1,4)
+    imgG = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+    facesDet = faceCascade.detectMultiScale(imgG,
+                                            scaleFactor=1.1,
+                                            minNeighbors=4,
+                                            )
     for (x, y, w, h) in facesDet:
         cv2.rectangle(img, (x, y), (x + w, y + h), (255, 255, 0), 3)
     cv2.imshow('Face Det', img)
