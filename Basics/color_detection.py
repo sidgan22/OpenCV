@@ -13,9 +13,21 @@ def vmin(evt):
     pass
 def vmax(evt):
     pass
+#
+# path = 'lambo.png'
+# img = cv2.imread(path)
 
-path = 'lambo.png'
-img = cv2.imread(path)
+fWidth = 640
+fHeight = 800
+cap = cv2.VideoCapture(1)
+cap.set(3,fWidth)
+cap.set(4,fHeight)
+cap.set(10,150)
+# while True:
+#     succ, img = cap.read()
+#     cv2.imshow('Col Det', img)
+#     if cv2.waitKey(1) & 0xFF == ord('q'):
+#         break
 
 #Create trackbars to adjust Hue, Saturation
 cv2.namedWindow("HSV_Bars")
@@ -28,7 +40,9 @@ cv2.createTrackbar('Val Min', 'HSV_Bars', 0, 255, vmin)
 cv2.createTrackbar('Val Max', 'HSV_Bars', 0, 255, vmax)
 
 while True:
-    img = cv2.imread(path)
+    succ, img = cap.read()
+    cv2.imshow('Col Det', img)
+
     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     hmin_val = cv2.getTrackbarPos('Hue Min', 'HSV_Bars')
     hmax_val = cv2.getTrackbarPos('Hue Max', 'HSV_Bars')
@@ -45,8 +59,7 @@ while True:
     mask = cv2.inRange(imgHSV, lower, upper)
     imgRes = cv2.bitwise_and(img,img,mask=mask)
 
-    cv2.imshow('Real', img)
-    cv2.imshow('HSV', imgHSV)
     cv2.imshow('Masked', mask)
     cv2.imshow('Final', imgRes)
-    cv2.waitKey(1)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
